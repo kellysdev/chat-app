@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground } from "react-native";
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground, Image } from "react-native";
 
 const Screen1 = ({ navigation }) => {
   const [name, setName] = useState("");
 
+  const backgroundImage = require("../assets/BackgroundImage.png");
+  const icon = {uri: "../assets/icon.svg"};
+
   return (
     <View style={styles.container}>
-      {/* <ImageBackground source="./assets/BackgroundImage.png" resizeMode="cover"> */}
+      <ImageBackground source={backgroundImage} resizeMode="cover" style={styles.bkgrImg} >
         <Text style={styles.title}>App Title</Text>
 
         <View style={styles.box}>
@@ -30,7 +33,7 @@ const Screen1 = ({ navigation }) => {
             <Text style={styles.buttonText}>Start Chatting</Text>
           </TouchableOpacity>
         </View>
-      {/* </ImageBackground> */}
+      </ImageBackground>
     </View>
   );
 };
@@ -38,7 +41,11 @@ const Screen1 = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  bkgrImg: {
+    flex: 1,
     alignItems: "center",
+    justifyContent: "center"
   },
   title: {
     fontSize: 45,
