@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground, Image } from "react-native";
 
-const Screen1 = ({ navigation }) => {
+const Start = ({ navigation }) => {
   const [name, setName] = useState("");
   const [chatBackgroundColor, setChatBackgroundColor] = useState("");
   const colors = ["#090C08", "#474056", "#8A95A5", "#B9C6AE"];
@@ -115,4 +115,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Screen1;
+export default Start;
