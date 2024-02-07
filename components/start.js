@@ -1,11 +1,18 @@
 import { useState } from "react";
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground, Image } from "react-native";
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground, Alert } from "react-native";
 
 const Start = ({ navigation }) => {
   const [name, setName] = useState("");
   const [chatBackgroundColor, setChatBackgroundColor] = useState("");
   const colors = ["#090C08", "#474056", "#8A95A5", "#B9C6AE"];
   const backgroundImage = require("../assets/BackgroundImage.png");
+
+  const handleSelection = (color) => {
+    const colorIndex = colors.indexOf(color);
+    const selectedColor = colors[colorIndex];
+    Alert.alert(`You selected ${selectedColor}`);
+    setChatBackgroundColor(selectedColor);
+  };
 
   return (
     <View style={styles.container}>
@@ -29,11 +36,11 @@ const Start = ({ navigation }) => {
           {/* buttons to change the background color of the chat screen: */}
           <View style={styles.colorsBox}>
             {/* display a button for each color in the colors array: */}
-            {colors.map((color, index) => (
+            {colors.map((color) => (
               <TouchableOpacity 
-                key={index} 
+                key={color} 
                 style={[styles.colorOptions, { backgroundColor: color }]}
-                onPress={() => setChatBackgroundColor(color)}
+                onPress={() => handleSelection(color)}
               ></TouchableOpacity>
             ))}
           </View>
