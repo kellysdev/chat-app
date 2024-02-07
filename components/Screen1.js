@@ -2,15 +2,16 @@ import { useState } from "react";
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground, Image } from "react-native";
 
 const Screen1 = ({ navigation }) => {
-  // captures the name entered in the input text box and saves it as a state:
   const [name, setName] = useState("");
-  // background image for starting screen:
+  const [chatBackgroundColor, setChatBackgroundColor] = useState("");
+  const colors = ["#090C08", "#474056", "#8A95A5", "#B9C6AE"];
   const backgroundImage = require("../assets/BackgroundImage.png");
 
   return (
     <View style={styles.container}>
       {/* background image container: */}
       <ImageBackground source={backgroundImage} resizeMode="cover" style={styles.bkgrImg} >
+
         {/* application title component: */}
         <Text style={styles.title}>App Title</Text>
 
@@ -24,16 +25,21 @@ const Screen1 = ({ navigation }) => {
           />
 
           <Text style={styles.chooseText}>Choose Background Color:</Text>
+
           {/* buttons to change the background color of the chat screen: */}
           <View style={styles.colorsBox}>
-            <TouchableOpacity style={styles.color1}></TouchableOpacity>
-            <TouchableOpacity style={[styles.color1, styles.color2]}></TouchableOpacity>
-            <TouchableOpacity style={[styles.color1, styles.color3]}></TouchableOpacity>
-            <TouchableOpacity style={[styles.color1, styles.color4]}></TouchableOpacity>
+            {/* display a button for each color in the colors array: */}
+            {colors.map((color, index) => (
+              <TouchableOpacity 
+                key={index} 
+                style={[styles.colorOptions, { backgroundColor: color }]}
+                onPress={() => setChatBackgroundColor(color)}
+              ></TouchableOpacity>
+            ))}
           </View>
 
           {/* button to enter chat: */}
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Screen2", {name: name})}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Screen2", {name: name, backgroundColor: chatBackgroundColor})}>
             <Text style={styles.buttonText}>Start Chatting</Text>
           </TouchableOpacity>
         </View>
@@ -89,21 +95,11 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     padding: 0,
   },
-  color1: {
+  colorOptions: {
     width: 50,
     height: 50,
     marginRight: 25,
-    borderRadius: 25,
-    backgroundColor: "#090c08"
-  },
-  color2: {
-    backgroundColor: "#474056"
-  },
-  color3: {
-    backgroundColor: "#8A95A5"
-  },
-  color4: {
-    backgroundColor: "#B9C6AE"
+    borderRadius: 25
   },
   button: {
     width: "88%",
