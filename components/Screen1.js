@@ -2,17 +2,20 @@ import { useState } from "react";
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground, Image } from "react-native";
 
 const Screen1 = ({ navigation }) => {
+  // captures the name entered in the input text box and saves it as a state:
   const [name, setName] = useState("");
-
+  // background image for starting screen:
   const backgroundImage = require("../assets/BackgroundImage.png");
-  const icon = {uri: "../assets/icon.svg"};
 
   return (
     <View style={styles.container}>
+      {/* background image container: */}
       <ImageBackground source={backgroundImage} resizeMode="cover" style={styles.bkgrImg} >
+        {/* application title component: */}
         <Text style={styles.title}>App Title</Text>
 
-        <View style={styles.box}>
+        {/* White box containing input field, option to change chat background color, and button to enter chat */}
+        <View style={styles.whiteBox}>
           <TextInput
             style={[styles.text, styles.textInput]}
             value={name}
@@ -21,7 +24,7 @@ const Screen1 = ({ navigation }) => {
           />
 
           <Text style={styles.chooseText}>Choose Background Color:</Text>
-          {/* "buttons" to change the background color of the chat screen: */}
+          {/* buttons to change the background color of the chat screen: */}
           <View style={styles.colorsBox}>
             <TouchableOpacity style={styles.color1}></TouchableOpacity>
             <TouchableOpacity style={[styles.color1, styles.color2]}></TouchableOpacity>
@@ -29,6 +32,7 @@ const Screen1 = ({ navigation }) => {
             <TouchableOpacity style={[styles.color1, styles.color4]}></TouchableOpacity>
           </View>
 
+          {/* button to enter chat: */}
           <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Screen2", {name: name})}>
             <Text style={styles.buttonText}>Start Chatting</Text>
           </TouchableOpacity>
@@ -53,7 +57,7 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     marginTop: "15%"
   },
-  box: {
+  whiteBox: {
     width: "88%",
     height: "44%",
     paddingTop: 15,
@@ -63,6 +67,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     alignSelf: "center"
+  },
+  textInput: {
+    width: "88%",
+    height: 50,
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 2,
+    opacity: 0.5
   },
   chooseText: {
     fontSize: 16,
@@ -92,13 +104,6 @@ const styles = StyleSheet.create({
   },
   color4: {
     backgroundColor: "#B9C6AE"
-  },
-  textInput: {
-    width: "88%",
-    height: 50,
-    padding: 10,
-    borderWidth: 1,
-    opacity: 0.5
   },
   button: {
     width: "88%",
