@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground, Alert } from "react-native";
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground } from "react-native";
 
 const Start = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -10,7 +10,6 @@ const Start = ({ navigation }) => {
   const handleSelection = (color) => {
     const colorIndex = colors.indexOf(color);
     const selectedColor = colors[colorIndex];
-    Alert.alert(`You selected ${selectedColor}`);
     setChatBackgroundColor(selectedColor);
   };
 
@@ -46,7 +45,7 @@ const Start = ({ navigation }) => {
           </View>
 
           {/* button to enter chat: */}
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Chat", {name: name, backgroundColor: chatBackgroundColor})}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Chat", {name: name, chatBackgroundColor: chatBackgroundColor})}>
             <Text style={styles.buttonText}>Start Chatting</Text>
           </TouchableOpacity>
         </View>
