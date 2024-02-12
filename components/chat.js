@@ -9,6 +9,8 @@ const Chat = ({ route, navigation }) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
+    navigation.setOptions({ title: name })
+
     setMessages([
       {
         _id: 1,
@@ -27,10 +29,6 @@ const Chat = ({ route, navigation }) => {
         },
       }
     ]);
-  }, []);
-
-  useEffect(() => {
-    navigation.setOptions({ title: name })
   }, []);
 
   const onSend = (newMessages) => {
