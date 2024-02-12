@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, Text, Platform, KeyboardAvoidingView } from "react-native";
-import { GiftedChat } from "react-native-gifted-chat";
+import { GiftedChat, Bubble } from "react-native-gifted-chat";
 
 const Chat = ({ route, navigation }) => {
   // extract props from navigation:
@@ -33,10 +33,25 @@ const Chat = ({ route, navigation }) => {
     navigation.setOptions({ title: name })
   }, []);
 
+  const renderBubble = (props) => {
+    return <Bubble 
+      {...props}
+      wrapperStyle={{
+        right: {
+          backgroundColor: "#FFF"
+        },
+        left: {
+          backgroundColor: "#FFF"
+        }
+      }}
+    />
+  };
+
   return (
     <View style={[styles.container, {backgroundColor: chatBackgroundColor}]} >
       <GiftedChat 
         messages={messages}
+        renderBubble={renderBubble}
         onSend={messages => onSend(messages)}
         user={{
           _id: 1
