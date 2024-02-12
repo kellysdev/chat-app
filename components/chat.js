@@ -12,6 +12,12 @@ const Chat = ({ route, navigation }) => {
     setMessages([
       {
         _id: 1,
+        text: "You have entered the chat",
+        createdAt: new Date(),
+        system: true,
+      },
+      {
+        _id: 2,
         text: "Hello developer",
         createdAt: new Date(),
         user: {
@@ -19,19 +25,17 @@ const Chat = ({ route, navigation }) => {
           name: "React Native",
           avatar: "https://placeimg.com/140/140/any",
         },
-      },
-      {
-        _id: 2,
-        text: "This is a system message",
-        createdAt: new Date(),
-        system: true,
-      },
+      }
     ]);
   }, []);
 
   useEffect(() => {
     navigation.setOptions({ title: name })
   }, []);
+
+  const onSend = (newMessages) => {
+    setMessages(previousMessages => GiftedChat.append(previousMessages, newMessages));
+  };
 
   const renderBubble = (props) => {
     return <Bubble 
