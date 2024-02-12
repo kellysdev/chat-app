@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { StyleSheet, View, Text, Platform, KeyboardAvoidingView } from "react-native";
+import { useState, useEffect, useCallback } from "react";
+import { StyleSheet, View, Platform, KeyboardAvoidingView } from "react-native";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
 
 const Chat = ({ route, navigation }) => {
@@ -31,16 +31,16 @@ const Chat = ({ route, navigation }) => {
     ]);
   }, []);
 
-  const onSend = (newMessages) => {
-    setMessages(previousMessages => GiftedChat.append(previousMessages, newMessages));
-  };
+  const onSend = useCallback((messages = []) => {
+    setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
+  }, [])
 
   const renderBubble = (props) => {
     return <Bubble 
       {...props}
       wrapperStyle={{
         right: {
-          backgroundColor: "#FFF"
+          backgroundColor: "#6C6A57"
         },
         left: {
           backgroundColor: "#FFF"
