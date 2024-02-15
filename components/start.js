@@ -2,11 +2,15 @@ import { useState } from "react";
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground, Platform, KeyboardAvoidingView } from "react-native";
 
 const Start = ({ navigation }) => {
+  // background image for start screen:
+  const backgroundImage = require("../assets/BackgroundImage.png");
+  
+  // pass user name from input to be the title of the chat screen
   const [name, setName] = useState("");
+
+  // user can change the background color of the chat screen
   const [chatBackgroundColor, setChatBackgroundColor] = useState("");
   const colors = ["#090C08", "#474056", "#8A95A5", "#B9C6AE"];
-  const backgroundImage = require("../assets/BackgroundImage.png");
-
   const handleSelection = (color) => {
     const colorIndex = colors.indexOf(color);
     const selectedColor = colors[colorIndex];
