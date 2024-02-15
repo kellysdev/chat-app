@@ -1,10 +1,27 @@
 import { useState } from "react";
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground, Platform, KeyboardAvoidingView } from "react-native";
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground, Platform, KeyboardAvoidingView, Alert } from "react-native";
+import { getAuth, signInAnonymously } from "firebase/auth";
 
 const Start = ({ navigation }) => {
   // background image for start screen:
   const backgroundImage = require("../assets/BackgroundImage.png");
-  
+
+  // initialize Firebase authentication handler
+  const auth = getAuth();
+  // allow anonymous sign in
+  const signInUser = () => {
+    signInAnonymously(auth)
+    .then(result => {
+      if (result.user.uid) {
+        navigation.navigate("Chat", { userID: result.user.uid, name: name, chatBackgroundColor: chatBackgroundColor });
+        Alert.alert("Signed in successfully!");
+      }
+    })
+    .catch((error) => {
+      Alert.alert("Unable to sign in.  Try again later.");
+    })
+  };
+
   // pass user name from input to be the title of the chat screen
   const [name, setName] = useState("");
 
@@ -57,7 +74,7 @@ const Start = ({ navigation }) => {
             accessible={true}
             accessibilityRole="button"
             style={styles.button} 
-            onPress={() => navigation.navigate("Chat", {name: name, chatBackgroundColor: chatBackgroundColor})}>
+            onPress={signInUser}>
             <Text style={styles.buttonText}>Start Chatting</Text>
           </TouchableOpacity>
         </View>
