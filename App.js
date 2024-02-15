@@ -1,12 +1,25 @@
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { initializeApp } from "firebase/app";
 import Start from "./components/start";
 import Chat from "./components/chat";
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  const firebaseConfig = {
+    apiKey: "AIzaSyD1jFWElNpyLQUhmU7yGI72ZMzyQiofuZo",
+    authDomain: "chat-app-kellys.firebaseapp.com",
+    projectId: "chat-app-kellys",
+    storageBucket: "chat-app-kellys.appspot.com",
+    messagingSenderId: "778758330793",
+    appId: "1:778758330793:web:b2a5556d8f9e83ad2e4cb8"
+  };
+
+  // initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Start">
