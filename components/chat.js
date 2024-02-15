@@ -1,39 +1,40 @@
 import { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View, Platform, KeyboardAvoidingView } from "react-native";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
+import { collection, getDocs, addDoc, onSnapshot, query, orderBy, where } from "firebase/firestore";
 
-const Chat = ({ route, navigation }) => {
+const Chat = ({ route, navigation, db }) => {
   // extract props from navigation:
-  const { name, chatBackgroundColor } = route.params;
+  const { userID, name, chatBackgroundColor } = route.params;
 
   const [messages, setMessages] = useState([]);
 
+  // add a listener to the messages collection that will update the messages state when there are new messages
   useEffect(() => {
-    navigation.setOptions({ title: name })
+    navigation.setOptions({ title: name });
 
-    setMessages([
-      {
-        _id: 1,
-        text: "You have entered the chat",
-        createdAt: new Date(),
-        system: true,
-      },
-      {
-        _id: 2,
-        text: "Hello developer",
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: "React Native",
-          avatar: "https://placeimg.com/140/140/any",
-        },
-      }
-    ]);
+    const q = query(collection(db, "messages"), orderBy("createdAt", "desc"));
+    const unsubMessages = onSnapshot(q, (docs) => {
+      let newMessages = [];
+      docs.forEach(doc => {
+        newMessages.push({
+          id: doc.id,
+          ...doc.data(),
+          createdAt: new Date()
+        })
+      });
+      setMessages(newMessages);
+    });
+
+    return () => {
+      if (unsubMessages) unsubMessages();
+    }
   }, []);
 
-  const onSend = useCallback((messages = []) => {
-    setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
-  }, [])
+  // save sent message to Firestore database
+  const onSend = (newMessages) => {
+    addDoc(collection(db, "messages"), newMessages[0]);
+  };
 
   const renderBubble = (props) => {
     return <Bubble 
