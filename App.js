@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 import Start from "./components/start";
 import Chat from "./components/chat";
 
