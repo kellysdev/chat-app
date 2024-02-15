@@ -7,6 +7,7 @@ const Chat = ({ route, navigation, db }) => {
   // extract props from navigation:
   const { userID, name, chatBackgroundColor } = route.params;
 
+  // array of messages updated by listener from collection in Firestore database
   const [messages, setMessages] = useState([]);
 
   // add a listener to the messages collection that will update the messages state when there are new messages
@@ -36,6 +37,7 @@ const Chat = ({ route, navigation, db }) => {
     addDoc(collection(db, "messages"), newMessages[0]);
   };
 
+  // change color of message bubbles
   const renderBubble = (props) => {
     return <Bubble 
       {...props}
