@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { initializeApp } from "firebase/app";
@@ -6,7 +6,11 @@ import { getFirestore } from "firebase/firestore";
 import Start from "./components/start";
 import Chat from "./components/chat";
 
+// create navigator
 const Stack = createNativeStackNavigator();
+
+// ignore warning about soon to be deprecated package:
+LogBox.ignoreLogs(["AsyncStorage has been extracted from", "@firebase/auth", "You are initializing Firebase Auth"]);
 
 const App = () => {
   const firebaseConfig = {

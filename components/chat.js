@@ -1,7 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet, View, Platform, KeyboardAvoidingView } from "react-native";
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
-import { collection, getDocs, addDoc, onSnapshot, query, orderBy, where } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, query, orderBy, where } from "firebase/firestore";
 
 const Chat = ({ route, navigation, db }) => {
   // extract props from navigation:
