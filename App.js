@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNetInfo } from "@eact-native-community/netinfo";
+import { useNetInfo } from "@react-native-community/netinfo";
 import { StyleSheet, LogBox, Alert } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
