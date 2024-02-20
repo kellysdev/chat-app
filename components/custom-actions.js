@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     borderColor: "#b2b2b2",
     borderWidth: 2,
     flex: 1,
+    justifyContent: "center",
   },
   iconText: {
     color: "#b2b2b2",
