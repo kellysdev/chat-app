@@ -1,8 +1,24 @@
-import { TouchableOpacity, StyleSheet, View, Text } from "react-native";
+import { TouchableOpacity, StyleSheet, View, Text, Alert } from "react-native";
 import { useActionSheet } from "@expo/react-native-action-sheet";
+import * as Location from "expo-location";
 
-const CustomActions = ({ wrapperStyle, iconTextStyle }) => {
+const CustomActions = ({ wrapperStyle, iconTextStyle, onSend }) => {
   const actionSheet = useActionSheet();
+
+  const getLocation = async () => {
+    let permissions = await Location.requestForegroundPermissionsAsync();
+    if (permissions?.granted) {
+      const location = await Location.getCurrentPositionAsync({});
+      if (location) {
+        onSend({
+          location: {
+            longitude: location.coords.longitude,
+            latitude: location.coords.latitude,
+          },
+        });
+      } else Alert.alert("Error occurred while fetching location.");
+    } else Alert.alert("Permissions haven't been granted.");
+  };
 
   const onActionPress = () => {
     const options = ["Choose from Library", "Take Picture", "Send Location", "Cancel"];
@@ -22,7 +38,7 @@ const CustomActions = ({ wrapperStyle, iconTextStyle }) => {
             console.log("User wants to take a photo");
             return;
           case 2:
-            console.log("User want to get their location");
+            getLocation();
           default:
         }
       },
