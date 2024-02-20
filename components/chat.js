@@ -4,7 +4,7 @@ import { GiftedChat, Bubble, InputToolbar } from "react-native-gifted-chat";
 import { collection, addDoc, onSnapshot, query, orderBy, where } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import MapView from "react-native-maps";
-import CustomActions from "./CustomActions";
+import CustomActions from "./custom-actions";
 
 const Chat = ({ route, navigation, db, isConnected }) => {
   // extract props from navigation:
