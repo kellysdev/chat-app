@@ -3,6 +3,8 @@ import { StyleSheet, View, Platform, KeyboardAvoidingView, Alert } from "react-n
 import { GiftedChat, Bubble, InputToolbar } from "react-native-gifted-chat";
 import { collection, addDoc, onSnapshot, query, orderBy, where } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import MapView from "react-native-maps";
+import CustomActions from "./custom-actions";
 
 const Chat = ({ route, navigation, db, isConnected }) => {
   // extract props from navigation:
@@ -63,6 +65,7 @@ const Chat = ({ route, navigation, db, isConnected }) => {
     addDoc(collection(db, "messages"), newMessages[0]);
   };
 
+  // Only render input toolbar / allow user to send messages if there is network connection
   const renderInputToolbar = (props) => {
     if (isConnected) return <InputToolbar {...props} />;
     else return null;
@@ -83,12 +86,43 @@ const Chat = ({ route, navigation, db, isConnected }) => {
     />
   };
 
+  // render CustomActions component which allows the user to send an image from library or camera or to send their location
+  const renderCustomActions = (props) => {
+    return <CustomActions {...props} />;
+  };
+
+  // will render a map with the users coordinates if the current message contains location data
+  const renderCustomView = (props) => {
+    const { currentMessage } = props;
+    if (currentMessage.location) {
+      return (
+        <MapView
+          style={{
+            width: 150,
+            height: 100,
+            borderRadius: 13,
+            margin: 3,
+          }}
+          region={{
+            latitude: currentMessage.location.latitude,
+            longitude: currentMessage.location.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
+      );
+    }
+    return null;
+  };
+
   return (
     <View style={[styles.container, {backgroundColor: chatBackgroundColor}]} >
       <GiftedChat 
         messages={messages}
         renderInputToolbar={renderInputToolbar}
         renderBubble={renderBubble}
+        renderActions={renderCustomActions}
+        renderCustomView={renderCustomView}
         onSend={messages => onSend(messages)}
         user={{
           _id: userID,
