@@ -3,6 +3,7 @@ import { StyleSheet, View, Platform, KeyboardAvoidingView, Alert } from "react-n
 import { GiftedChat, Bubble, InputToolbar } from "react-native-gifted-chat";
 import { collection, addDoc, onSnapshot, query, orderBy, where } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import CustomActions from "./CustomActions";
 
 const Chat = ({ route, navigation, db, isConnected }) => {
   // extract props from navigation:
@@ -83,12 +84,18 @@ const Chat = ({ route, navigation, db, isConnected }) => {
     />
   };
 
+  // render CustomActions component which allows the user to send an image from library or camera or to send their location
+  const renderCustomActions = (props) => {
+    return <CustomActions {...props} />;
+  };
+
   return (
     <View style={[styles.container, {backgroundColor: chatBackgroundColor}]} >
       <GiftedChat 
         messages={messages}
         renderInputToolbar={renderInputToolbar}
         renderBubble={renderBubble}
+        renderActions={renderCustomActions}
         onSend={messages => onSend(messages)}
         user={{
           _id: userID,
