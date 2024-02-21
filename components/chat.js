@@ -6,7 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import MapView from "react-native-maps";
 import CustomActions from "./custom-actions";
 
-const Chat = ({ route, navigation, db, isConnected }) => {
+const Chat = ({ route, navigation, db, isConnected, storage }) => {
   // extract props from navigation:
   const { userID, name, chatBackgroundColor } = route.params;
 
@@ -88,7 +88,7 @@ const Chat = ({ route, navigation, db, isConnected }) => {
 
   // render CustomActions component which allows the user to send an image from library or camera or to send their location
   const renderCustomActions = (props) => {
-    return <CustomActions storage={storage} {...props} />;
+    return <CustomActions userID={userID} storage={storage} {...props} />;
   };
 
   // will render a map with the users coordinates if the current message contains location data
