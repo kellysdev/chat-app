@@ -92,13 +92,7 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
   };
   
   return (
-    <TouchableOpacity 
-      style={styles.container} 
-      onPress={onActionPress}
-      accessibilityLabel="Press here to open the actions menu."
-      accessibilityHint="Send a picture or share your location."
-      accessibilityRole="imagebutton"
-    >
+    <TouchableOpacity style={styles.container} onPress={onActionPress}>
       <View style={[styles.wrapper, wrapperStyle]}>
         <Text style={[styles.iconText, iconTextStyle]}>+</Text>
       </View>
