@@ -1,6 +1,7 @@
 import { TouchableOpacity, StyleSheet, View, Text, Alert } from "react-native";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import * as Location from "expo-location";
+import * as ImagePicker from "expo-image-picker";
 
 const CustomActions = ({ wrapperStyle, iconTextStyle, onSend }) => {
   const actionSheet = useActionSheet();
@@ -20,6 +21,18 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend }) => {
     } else Alert.alert("Permissions haven't been granted.");
   };
 
+  const pickImage = async () => {
+    let permissions = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (permissions?.granted) {
+      let result = await ImagePicker.launchImageLibraryAsync();
+      if (!result.canceled) {
+        const imageURI = result.assets[0].uri;
+        const response = await fetch(imageURI);
+        const blob = await response.blob();
+      }
+    } else Alert.alert("Permissions haven't been granted.");
+  };
+
   const onActionPress = () => {
     const options = ["Choose from Library", "Take Picture", "Send Location", "Cancel"];
     const cancelButtonIndex = options.length - 1;
@@ -32,7 +45,7 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend }) => {
       async (buttonIndex) => {
         switch (buttonIndex) {
           case 0:
-            console.log("User wants to pick an image");
+            pickImage();
             return;
           case 1:
             console.log("User wants to take a photo");
