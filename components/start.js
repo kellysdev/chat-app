@@ -40,7 +40,7 @@ const Start = ({ navigation }) => {
       <ImageBackground source={backgroundImage} resizeMode="cover" style={styles.bkgrImg} >
 
         {/* application title component: */}
-        <Text style={styles.title}>App Title</Text>
+        <Text style={styles.title}>Chat App</Text>
 
         {/* White box containing input field, option to change chat background color, and button to enter chat */}
         <View style={styles.whiteBox}>
