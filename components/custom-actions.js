@@ -53,6 +53,16 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
     } else Alert.alert("Permissions haven't been granted.");
   };
 
+  // Expo ImagePicker requeusts user permission to use the device camera
+  // with permission, user can take a picture which will be sent to chat through uploadAndSendImage
+  const takePhoto = async () => {
+    let permissions = await ImagePicker.requestCameraPermissionsAsync();
+    if (permissions?.granted) {
+      let result = await ImagePicker.launchCameraAsync();
+      if (!result.canceled) await uploadAndSendImage(result.assets[0].uri);
+    } else Alert.alert("Permissions hahven't been granted.");
+  };
+
   const onActionPress = () => {
     const options = ["Choose from Library", "Take Picture", "Send Location", "Cancel"];
     const cancelButtonIndex = options.length - 1;
@@ -68,7 +78,7 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
             pickImage();
             return;
           case 1:
-            console.log("User wants to take a photo");
+            takePhoto();
             return;
           case 2:
             getLocation();
