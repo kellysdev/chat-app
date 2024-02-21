@@ -102,11 +102,10 @@ const styles = StyleSheet.create({
   whiteBox: {
     width: "88%",
     height: "44%",
-    paddingTop: 15,
-    paddingBottom: 15,
     marginTop: "70%",
+    marginBottom: "5%",
     backgroundColor: "white",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     alignItems: "center",
     alignSelf: "center"
   },
@@ -114,6 +113,7 @@ const styles = StyleSheet.create({
     width: "88%",
     height: 50,
     padding: 10,
+    marginTop: -15,
     borderWidth: 1,
     borderRadius: 2,
     opacity: 0.5
@@ -128,18 +128,20 @@ const styles = StyleSheet.create({
   },
   colorsBox: {
     flexDirection: "row",
-    alignItems: "flex-start",
+    marginRight: 25,
+    marginTop: -16,
     padding: 0,
   },
   colorOptions: {
-    width: 50,
-    height: 50,
-    marginRight: 25,
+    width: 48,
+    height: 48,
+    marginRight: 18,
     borderRadius: 25
   },
   button: {
     width: "88%",
     height: 50,
+    marginBottom: -15,
     backgroundColor: "#757083",
     alignItems: "center",
     justifyContent: "center"
