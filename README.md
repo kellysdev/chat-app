@@ -34,7 +34,7 @@ Install Expo GO on your mobile device or use an emulator, like [Android Studio H
 
 ## Screenshots
 
-![start screen screenshot](./src/assets/screenshot-start.png)
+![start screen screenshot](./assets/screenshot-start.png)
 
 ## Future Updates
 
