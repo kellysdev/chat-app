@@ -7,6 +7,8 @@ import * as ImagePicker from "expo-image-picker";
 const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID }) => {
   const actionSheet = useActionSheet();
 
+  // Expo Location API requests user permission to access their device location
+  // with permission, user location data is sent to the Chat component to be included in the message object
   const getLocation = async () => {
     let permissions = await Location.requestForegroundPermissionsAsync();
     if (permissions?.granted) {
@@ -63,6 +65,7 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, userID })
     } else Alert.alert("Permissions hahven't been granted.");
   };
 
+  // opens an options menu to allow users to select an action or cancel and close the menu
   const onActionPress = () => {
     const options = ["Choose from Library", "Take Picture", "Send Location", "Cancel"];
     const cancelButtonIndex = options.length - 1;
