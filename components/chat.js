@@ -88,7 +88,7 @@ const Chat = ({ route, navigation, db, isConnected }) => {
 
   // render CustomActions component which allows the user to send an image from library or camera or to send their location
   const renderCustomActions = (props) => {
-    return <CustomActions {...props} />;
+    return <CustomActions storage={storage} {...props} />;
   };
 
   // will render a map with the users coordinates if the current message contains location data
