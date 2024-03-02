@@ -22,7 +22,7 @@ A cross-platform chat application that allows users to share images and their lo
 
 To get a local copy up and runnning, follow these steps:
 
-1. Clone this repository: `git clone https://github.com/lladysmall/chat-app.git`
+1. Clone this repository: `git clone https://github.com/kellysdev/chat-app.git`
 
 2. From the working directory, install the app's dependencies: `npm install`
 
